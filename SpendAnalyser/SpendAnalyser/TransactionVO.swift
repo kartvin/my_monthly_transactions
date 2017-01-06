@@ -14,4 +14,6 @@ class TransactionVO : NSObject {
     var merchant :NSString = ""
     var transactionTime :NSString = ""
     var transactionDisplayTime :String = ""
+    var transactionDisplayMonth :String = ""
+
 }

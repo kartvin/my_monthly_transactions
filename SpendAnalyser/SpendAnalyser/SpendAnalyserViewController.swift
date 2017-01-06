@@ -9,6 +9,35 @@
 import UIKit
 class SpendAnalyserViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
+    fileprivate var sectionsList: Array<String>?
+    fileprivate var transactionListDict: NSMutableDictionary?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.sortAndLoadTransactions()
+    }
+
+    private func sortAndLoadTransactions() {
+        guard let transactions = ServiceManager.sharedInstance.transactionList else {
+            return
+        }
+        var transactionDates: [String]? = []
+        self.transactionListDict = NSMutableDictionary()
+        
+        for transactionItem in transactions {
+            transactionDates?.append(transactionItem.transactionDisplayMonth as String)
+        }
+        self.sectionsList = Array(Set(transactionDates! as [String]))
+        self.sectionsList = self.sectionsList?.sorted { $0 > $1 }
+        
+        for transactionDate in self.sectionsList! {
+            let filteredArray = transactions.filter() { $0.transactionDisplayMonth == transactionDate }
+            self.transactionListDict?.setValue(filteredArray, forKey: transactionDate)
+        }
+        self.tableView.reloadData()
+
+        
+    }
 }
 
 extension SpendAnalyserViewController: UITableViewDelegate, UITableViewDataSource {
@@ -23,19 +52,19 @@ extension SpendAnalyserViewController: UITableViewDelegate, UITableViewDataSourc
 //        }
 //        
 //        let transaction = transactions?[indexPath.row]
-//        cell.textLabel?.text = transaction?.merchant as? String
+        cell.textLabel?.text = self.sectionsList?[indexPath.row]
 //        let amountStr = "$"
 //        cell.detailTextLabel?.text = amountStr.appending((transaction?.amount.stringFormattedWithComma)!)
-        cell.textLabel?.text = "Testing"
-        let amountStr = "$"
-        cell.detailTextLabel?.text = amountStr
 
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        let transactions = self.transactionListDict![sectionsList?[section] as Any] as? [TransactionVO]
-        return 10
+        if let sectionData = self.sectionsList {
+            return sectionData.count
+        } else {
+            return 0
+        }
     }
     
 }

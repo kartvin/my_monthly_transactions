@@ -12,7 +12,8 @@ class ServiceManager: NSObject {
     var transactions : NSMutableArray?
     private var urls: NSDictionary?
     private let httpClient: RestClient
-
+    var transactionList :  Array<TransactionVO>?
+    
     class var sharedInstance: ServiceManager {
         struct Singleton {
             static let instance = ServiceManager()
@@ -58,6 +59,7 @@ class ServiceManager: NSObject {
                     let response = self.parseJsonForGetAllTransactions(response:jsonObject!)
                     
                     DispatchQueue.main.sync(execute: { () -> Void in
+                        self.transactionList = response.transactions
                         completion(response.transactions)
                     })
                 }catch {
@@ -92,6 +94,8 @@ class ServiceManager: NSObject {
                 transaction.transactionTime = transactionTime
                 if (transactionTime.length > 9) {
                     transaction.transactionDisplayTime = (transactionTime.substring(with: NSRange(location: 0, length: 10)) as NSString) as String
+                    transaction.transactionDisplayMonth = (transactionTime.substring(with: NSRange(location: 0, length: 7)) as NSString) as String
+
                 }
                 
                 transactions.append(transaction)
