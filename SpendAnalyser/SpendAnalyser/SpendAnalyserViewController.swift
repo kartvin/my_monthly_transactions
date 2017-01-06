@@ -12,16 +12,39 @@ class SpendAnalyserViewController: UIViewController {
     @IBOutlet weak var expesneLabel: UILabel!
     fileprivate var sectionsList: Array<String>?
     fileprivate var transactionListDict: NSMutableDictionary?
-    
+    @IBOutlet weak var toastLabel: UILabel!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var loaderView: UIView!
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.sortAndLoadAnalyserResults()
+        if ((ServiceManager.sharedInstance.transactionList?.count)! > 0) {
+            self.loaderView.isHidden = false;
+            ServiceManager.sharedInstance.getAllTransactionsForMonth(completion: {  (result : Array<TransactionVO>) in
+                self.sortAndLoadAnalyserResults(newResult: result)
+                self.loaderView.isHidden = true;
+                self.tableView.reloadData()
+            }) { (error : NSError) in
+                self.toastLabel.text = error.localizedDescription
+                self.spinner.stopAnimating()
+                self.showErrorAlert(errorMessage: error.localizedDescription)
+            }
+        }
     }
 
-    private func sortAndLoadAnalyserResults() {
-        guard let transactions = ServiceManager.sharedInstance.transactionList else {
+    private func showErrorAlert(errorMessage : String) {
+        let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func sortAndLoadAnalyserResults(newResult : Array<TransactionVO>) {
+        
+        guard var transactions = ServiceManager.sharedInstance.transactionList else {
             return
         }
+        
+        transactions += newResult
         var transactionDates: [String]? = []
         self.transactionListDict = NSMutableDictionary()
         
@@ -36,9 +59,9 @@ class SpendAnalyserViewController: UIViewController {
         
         for transactionDate in self.sectionsList! {
             let filteredArray = transactions.filter() { $0.transactionDisplayMonth == transactionDate }
-            let crediCardPaymentList = filteredArray.filter() {$0.amount > 0}
-            let crediCardSpentList = filteredArray.filter() {$0.amount < 0}
-            let totalIncomeForMonth = crediCardPaymentList.reduce(0) { $0 + $1.amount}
+            let incomeList = filteredArray.filter() {$0.merchant != "Credit Card Payment" && $0.merchant != "CC Payment" && $0.amount > 0}//this will filter our credit card payments from the income list
+            let crediCardSpentList = filteredArray.filter() {$0.merchant != "Credit Card Payment" && $0.merchant != "CC Payment" && $0.amount < 0}
+            let totalIncomeForMonth = incomeList.reduce(0) { $0 + $1.amount}
             let totalExpForMonth = crediCardSpentList.reduce(0) { $0 + $1.amount}
             
             totalIncome += abs(totalIncomeForMonth)

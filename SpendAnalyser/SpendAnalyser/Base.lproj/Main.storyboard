@@ -225,12 +225,43 @@
                                 <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uJd-OC-ktL">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="SQD-nF-GSG">
+                                        <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="37" id="G1W-VR-Tzq"/>
+                                            <constraint firstAttribute="width" constant="37" id="bZV-hI-urp"/>
+                                        </constraints>
+                                        <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </activityIndicatorView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="WA0-jB-K8O">
+                                        <rect key="frame" x="10" y="280" width="355" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="WA0-jB-K8O" firstAttribute="leading" secondItem="uJd-OC-ktL" secondAttribute="leading" constant="10" id="3lL-w9-f9y"/>
+                                    <constraint firstItem="SQD-nF-GSG" firstAttribute="centerX" secondItem="uJd-OC-ktL" secondAttribute="centerX" id="UiD-5D-4dw"/>
+                                    <constraint firstItem="SQD-nF-GSG" firstAttribute="top" secondItem="WA0-jB-K8O" secondAttribute="bottom" constant="14" id="ZwE-t8-2dn"/>
+                                    <constraint firstItem="SQD-nF-GSG" firstAttribute="centerY" secondItem="uJd-OC-ktL" secondAttribute="centerY" id="bWi-cw-bDm"/>
+                                    <constraint firstAttribute="trailing" secondItem="WA0-jB-K8O" secondAttribute="trailing" constant="10" id="llO-0a-Z25"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="mDX-6Y-S6C" firstAttribute="top" secondItem="3ON-TK-xiR" secondAttribute="bottom" id="2Xb-C2-vTg"/>
                             <constraint firstItem="SZi-ER-sxj" firstAttribute="top" secondItem="mDX-6Y-S6C" secondAttribute="bottom" id="7rN-Fm-m8D"/>
                             <constraint firstItem="ehB-5A-nZg" firstAttribute="leading" secondItem="Ncc-2c-aRj" secondAttribute="leading" id="87f-vi-EUF"/>
+                            <constraint firstItem="uJd-OC-ktL" firstAttribute="leading" secondItem="Ncc-2c-aRj" secondAttribute="leading" id="8JW-tZ-sB5"/>
+                            <constraint firstItem="uJd-OC-ktL" firstAttribute="top" secondItem="Ncc-2c-aRj" secondAttribute="top" id="N6P-Zd-bf4"/>
+                            <constraint firstAttribute="trailing" secondItem="uJd-OC-ktL" secondAttribute="trailing" id="U0Y-5Y-jYP"/>
+                            <constraint firstItem="SZi-ER-sxj" firstAttribute="top" secondItem="uJd-OC-ktL" secondAttribute="bottom" id="aQZ-pK-xng"/>
                             <constraint firstAttribute="trailing" secondItem="mDX-6Y-S6C" secondAttribute="trailing" id="qKS-7S-j1r"/>
                             <constraint firstItem="ehB-5A-nZg" firstAttribute="top" secondItem="3ON-TK-xiR" secondAttribute="bottom" id="r8O-vx-ejN"/>
                             <constraint firstItem="mDX-6Y-S6C" firstAttribute="leading" secondItem="Ncc-2c-aRj" secondAttribute="leading" id="t3W-ob-tLb"/>
@@ -241,7 +272,10 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="expesneLabel" destination="ehB-5A-nZg" id="Civ-2I-paL"/>
+                        <outlet property="loaderView" destination="uJd-OC-ktL" id="OlS-Qr-QDp"/>
+                        <outlet property="spinner" destination="SQD-nF-GSG" id="G9m-jq-10x"/>
                         <outlet property="tableView" destination="mDX-6Y-S6C" id="Vh7-Uf-5SK"/>
+                        <outlet property="toastLabel" destination="WA0-jB-K8O" id="tTt-Kx-6ch"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gGn-fC-oR3" userLabel="First Responder" sceneMemberID="firstResponder"/>

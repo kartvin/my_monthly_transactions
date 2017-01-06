@@ -4,5 +4,7 @@
 <dict>
 	<key>GetAllTransactions</key>
 	<string>https://2016.api.levelmoney.com/api/v2/core/get-all-transactions</string>
+	<key>TransactionForMonth</key>
+	<string>https://2016.api.levelmoney.com/api/v2/core/projected-transactions-for-month</string>
 </dict>
 </plist>

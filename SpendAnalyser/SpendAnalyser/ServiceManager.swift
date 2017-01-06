@@ -30,11 +30,26 @@ class ServiceManager: NSObject {
     }
 
     public func getAllTransactions(completion: @escaping (_ result: Array<TransactionVO>) -> Void, failure: @escaping (_ error: NSError) -> Void) {
+        let urlString = self.urls?["GetAllTransactions"] as! String
+        makeServiceCall(urlString: urlString, completion: { (transactions: Array<TransactionVO>) in
+            self.transactionList = transactions
+            completion(transactions)
+        }, failure: failure)
+    }
+    
+    public func getAllTransactionsForMonth(completion: @escaping (_ result: Array<TransactionVO>) -> Void, failure: @escaping (_ error: NSError) -> Void) {
+        
+        let urlString = self.urls?["TransactionForMonth"] as! String
+        makeServiceCall(urlString: urlString, completion: { (transactions: Array<TransactionVO>) in
+            completion(transactions)
+        }, failure: failure)
+    }
+    
+    public func makeServiceCall(urlString:String, completion: @escaping (_ result: Array<TransactionVO>) -> Void, failure: @escaping (_ error: NSError) -> Void) {
         if (!Reachability.isNetworkReachable()) {//Check for internet connection
             failure(NSError(domain: "No internet connection", code: 121, userInfo: nil))
             return
         }
-        let urlString = self.urls?["GetAllTransactions"] as! String
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async(execute: { () -> Void in
             var request = URLRequest(url: URL(string: urlString)!)
             do {
@@ -45,7 +60,7 @@ class ServiceManager: NSObject {
                 DispatchQueue.main.sync(execute: { () -> Void in
                     failure(NSError(domain: "Invalid parameters", code: 121, userInfo: nil))
                 })
-               return
+                return
             }
             request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")  // the request is JSON
             request.httpMethod = "POST"
@@ -56,7 +71,6 @@ class ServiceManager: NSObject {
                     let response = self.parseJsonForGetAllTransactions(response:jsonObject!)
                     
                     DispatchQueue.main.sync(execute: { () -> Void in
-                        self.transactionList = response.transactions
                         completion(response.transactions)
                     })
                 }catch {
@@ -85,8 +99,14 @@ class ServiceManager: NSObject {
                 return responseObject
             }
             for transactionItem in transactionList as! Array<AnyObject>{
+                let merchant = (transactionItem["merchant"] as AnyObject? as? NSString) ?? ""
+                
+                //This is skip all donut related transactions from the list
+                if merchant.lowercased.contains("donut") || merchant.lowercased.contains("dunkin")  {
+                    continue
+                }
                 let transaction:TransactionVO = TransactionVO()
-                transaction.merchant = (transactionItem["merchant"] as AnyObject? as? NSString) ?? ""
+                transaction.merchant = merchant
                 transaction.amount  =  (transactionItem["amount"]  as AnyObject? as? Int) ?? 0
 
                 let transactionTime =  (transactionItem["transaction-time"] as AnyObject? as? NSString) ?? ""
@@ -113,7 +133,9 @@ class ServiceManager: NSObject {
                       "json-strict-mode" : false,
                       "json-verbose-response" :false] as [String : Any]
          as [String : Any]
-        return ["args" : params]
+        return ["args" : params,
+                "year":2017,
+                "month":1]
     
     }
 }
