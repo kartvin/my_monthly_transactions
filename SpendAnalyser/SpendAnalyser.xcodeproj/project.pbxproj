@@ -13,7 +13,6 @@
 		1BE350361E1F2E98005B229E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BE350341E1F2E98005B229E /* Main.storyboard */; };
 		1BE350381E1F2E98005B229E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BE350371E1F2E98005B229E /* Assets.xcassets */; };
 		1BE3503B1E1F2E98005B229E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BE350391E1F2E98005B229E /* LaunchScreen.storyboard */; };
-		1BE350461E1F2E98005B229E /* SpendAnalyserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE350451E1F2E98005B229E /* SpendAnalyserTests.swift */; };
 		1BE350511E1F2E98005B229E /* SpendAnalyserUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE350501E1F2E98005B229E /* SpendAnalyserUITests.swift */; };
 		1BE350601E1F33E4005B229E /* TransactionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE3505F1E1F33E4005B229E /* TransactionListViewController.swift */; };
 		1BE350631E1F3E8D005B229E /* TransactionVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE350621E1F3E8D005B229E /* TransactionVO.swift */; };
@@ -26,13 +25,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1BE350421E1F2E98005B229E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1BE350231E1F2E97005B229E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1BE3502A1E1F2E97005B229E;
-			remoteInfo = SpendAnalyser;
-		};
 		1BE3504D1E1F2E98005B229E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1BE350231E1F2E97005B229E /* Project object */;
@@ -51,7 +43,6 @@
 		1BE350371E1F2E98005B229E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1BE3503A1E1F2E98005B229E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1BE3503C1E1F2E98005B229E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1BE350411E1F2E98005B229E /* SpendAnalyserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpendAnalyserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE350451E1F2E98005B229E /* SpendAnalyserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendAnalyserTests.swift; sourceTree = "<group>"; };
 		1BE350471E1F2E98005B229E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BE3504C1E1F2E98005B229E /* SpendAnalyserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpendAnalyserUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,13 +60,6 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		1BE350281E1F2E97005B229E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1BE3503E1E1F2E98005B229E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -123,7 +107,6 @@
 			isa = PBXGroup;
 			children = (
 				1BE3502B1E1F2E97005B229E /* SpendAnalyser.app */,
-				1BE350411E1F2E98005B229E /* SpendAnalyserTests.xctest */,
 				1BE3504C1E1F2E98005B229E /* SpendAnalyserUITests.xctest */,
 			);
 			name = Products;
@@ -212,24 +195,6 @@
 			productReference = 1BE3502B1E1F2E97005B229E /* SpendAnalyser.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1BE350401E1F2E98005B229E /* SpendAnalyserTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1BE350581E1F2E98005B229E /* Build configuration list for PBXNativeTarget "SpendAnalyserTests" */;
-			buildPhases = (
-				1BE3503D1E1F2E98005B229E /* Sources */,
-				1BE3503E1E1F2E98005B229E /* Frameworks */,
-				1BE3503F1E1F2E98005B229E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1BE350431E1F2E98005B229E /* PBXTargetDependency */,
-			);
-			name = SpendAnalyserTests;
-			productName = SpendAnalyserTests;
-			productReference = 1BE350411E1F2E98005B229E /* SpendAnalyserTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		1BE3504B1E1F2E98005B229E /* SpendAnalyserUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BE3505B1E1F2E98005B229E /* Build configuration list for PBXNativeTarget "SpendAnalyserUITests" */;
@@ -263,12 +228,6 @@
 						DevelopmentTeam = LX2JP43HTV;
 						ProvisioningStyle = Automatic;
 					};
-					1BE350401E1F2E98005B229E = {
-						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = LX2JP43HTV;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 1BE3502A1E1F2E97005B229E;
-					};
 					1BE3504B1E1F2E98005B229E = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = LX2JP43HTV;
@@ -291,7 +250,6 @@
 			projectRoot = "";
 			targets = (
 				1BE3502A1E1F2E97005B229E /* SpendAnalyser */,
-				1BE350401E1F2E98005B229E /* SpendAnalyserTests */,
 				1BE3504B1E1F2E98005B229E /* SpendAnalyserUITests */,
 			);
 		};
@@ -306,13 +264,6 @@
 				1BE350651E1F4B61005B229E /* Configuration.plist in Resources */,
 				1BE350381E1F2E98005B229E /* Assets.xcassets in Resources */,
 				1BE350361E1F2E98005B229E /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1BE3503F1E1F2E98005B229E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,14 +294,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1BE3503D1E1F2E98005B229E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1BE350461E1F2E98005B229E /* SpendAnalyserTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1BE350481E1F2E98005B229E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -362,11 +305,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1BE350431E1F2E98005B229E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1BE3502A1E1F2E97005B229E /* SpendAnalyser */;
-			targetProxy = 1BE350421E1F2E98005B229E /* PBXContainerItemProxy */;
-		};
 		1BE3504E1E1F2E98005B229E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1BE3502A1E1F2E97005B229E /* SpendAnalyser */;
@@ -515,36 +453,6 @@
 			};
 			name = Release;
 		};
-		1BE350591E1F2E98005B229E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = LX2JP43HTV;
-				INFOPLIST_FILE = SpendAnalyserTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.barclaycardus.sample.SpendAnalyserTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpendAnalyser.app/SpendAnalyser";
-			};
-			name = Debug;
-		};
-		1BE3505A1E1F2E98005B229E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = LX2JP43HTV;
-				INFOPLIST_FILE = SpendAnalyserTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.barclaycardus.sample.SpendAnalyserTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpendAnalyser.app/SpendAnalyser";
-			};
-			name = Release;
-		};
 		1BE3505C1E1F2E98005B229E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -590,15 +498,6 @@
 			buildConfigurations = (
 				1BE350561E1F2E98005B229E /* Debug */,
 				1BE350571E1F2E98005B229E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1BE350581E1F2E98005B229E /* Build configuration list for PBXNativeTarget "SpendAnalyserTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1BE350591E1F2E98005B229E /* Debug */,
-				1BE3505A1E1F2E98005B229E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
