@@ -15,6 +15,9 @@
 		1BE350511E1F2E98005B229E /* SpendAnalyserUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE350501E1F2E98005B229E /* SpendAnalyserUITests.swift */; };
 		1BE350601E1F33E4005B229E /* TransactionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE3505F1E1F33E4005B229E /* TransactionListViewController.swift */; };
 		1BE350631E1F3E8D005B229E /* TransactionVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE350621E1F3E8D005B229E /* TransactionVO.swift */; };
+		1BE350651E1F4B61005B229E /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1BE350641E1F4B61005B229E /* Configuration.plist */; };
+		1BE350681E1F4B9C005B229E /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE350671E1F4B9C005B229E /* ServiceManager.swift */; };
+		1BE3506A1E1F4D32005B229E /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE350691E1F4D32005B229E /* RestClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		1BE350521E1F2E98005B229E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BE3505F1E1F33E4005B229E /* TransactionListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionListViewController.swift; sourceTree = "<group>"; };
 		1BE350621E1F3E8D005B229E /* TransactionVO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionVO.swift; sourceTree = "<group>"; };
+		1BE350641E1F4B61005B229E /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
+		1BE350671E1F4B9C005B229E /* ServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
+		1BE350691E1F4D32005B229E /* RestClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,7 @@
 		1BE3502D1E1F2E97005B229E /* SpendAnalyser */ = {
 			isa = PBXGroup;
 			children = (
+				1BE350661E1F4B8B005B229E /* Managers */,
 				1BE350611E1F3E76005B229E /* Managed Objects */,
 				1BE3502E1E1F2E97005B229E /* AppDelegate.swift */,
 				1BE3505E1E1F33C8005B229E /* ViewControllers */,
@@ -106,6 +113,7 @@
 				1BE350371E1F2E98005B229E /* Assets.xcassets */,
 				1BE350391E1F2E98005B229E /* LaunchScreen.storyboard */,
 				1BE3503C1E1F2E98005B229E /* Info.plist */,
+				1BE350641E1F4B61005B229E /* Configuration.plist */,
 			);
 			path = SpendAnalyser;
 			sourceTree = "<group>";
@@ -142,6 +150,15 @@
 				1BE350621E1F3E8D005B229E /* TransactionVO.swift */,
 			);
 			name = "Managed Objects";
+			sourceTree = "<group>";
+		};
+		1BE350661E1F4B8B005B229E /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				1BE350671E1F4B9C005B229E /* ServiceManager.swift */,
+				1BE350691E1F4D32005B229E /* RestClient.swift */,
+			);
+			name = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BE3503B1E1F2E98005B229E /* LaunchScreen.storyboard in Resources */,
+				1BE350651E1F4B61005B229E /* Configuration.plist in Resources */,
 				1BE350381E1F2E98005B229E /* Assets.xcassets in Resources */,
 				1BE350361E1F2E98005B229E /* Main.storyboard in Resources */,
 			);
@@ -284,6 +302,8 @@
 				1BE350631E1F3E8D005B229E /* TransactionVO.swift in Sources */,
 				1BE3502F1E1F2E97005B229E /* AppDelegate.swift in Sources */,
 				1BE350601E1F33E4005B229E /* TransactionListViewController.swift in Sources */,
+				1BE3506A1E1F4D32005B229E /* RestClient.swift in Sources */,
+				1BE350681E1F4B9C005B229E /* ServiceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

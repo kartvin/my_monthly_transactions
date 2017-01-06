@@ -8,6 +8,21 @@
 
 import UIKit
 
+struct Number {
+    static let formatterWithComma: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.groupingSeparator = ","
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
+}
+
+extension Integer {
+    var stringFormattedWithComma: String {
+        return Number.formatterWithComma.string(from: self as! NSNumber) ?? ""
+    }
+}
+
 class TransactionListViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     var transactionListDict: NSMutableDictionary?
@@ -15,6 +30,12 @@ class TransactionListViewController: UIViewController,UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ServiceManager.sharedInstance.getAllTransactions(input: "test") { (result : String) in
+            print(result)
+            sortTransactions()
+            self.tableView.reloadData()
+        }
+        
         let arrayList = NSMutableArray()
         
         for _ in 1...10 {
@@ -33,6 +54,9 @@ class TransactionListViewController: UIViewController,UITableViewDelegate, UITab
         self.tableView.reloadData()
     }
     
+    private func sortTransactions() {
+        
+    }
     // MARK: - Table view data source
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -44,7 +68,8 @@ class TransactionListViewController: UIViewController,UITableViewDelegate, UITab
         
         let transaction = transactions?[indexPath.row]
         cell.textLabel?.text = transaction?.merchant as? String
-        cell.detailTextLabel?.text = String(describing: transaction?.amount)
+        let amountStr = "$"
+        cell.detailTextLabel?.text = amountStr.appending((transaction?.amount.stringFormattedWithComma)!)
         return cell
     }
     
@@ -55,7 +80,11 @@ class TransactionListViewController: UIViewController,UITableViewDelegate, UITab
     }
  
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.sectionsList!.count
+        if let sectionData = self.sectionsList {
+            return sectionData.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
