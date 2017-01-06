@@ -28,8 +28,8 @@ class TransactionListViewController: UIViewController {
     fileprivate var transactionListDict: NSMutableDictionary?
     fileprivate var sectionsList: Array<String>?
     @IBOutlet weak var loaderView: UIView!
-    
-    
+    @IBOutlet weak var toastLabel: UILabel!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,8 @@ class TransactionListViewController: UIViewController {
             self.loaderView.isHidden = true;
             self.tableView.reloadData()
         }) { (error : NSError) in
-            self.loaderView.isHidden = true;
+            self.toastLabel.text = error.localizedDescription
+            self.spinner.stopAnimating()
             self.showErrorAlert(errorMessage: error.localizedDescription)
         }
     }
