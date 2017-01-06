@@ -26,38 +26,39 @@ extension Integer {
 class TransactionListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     fileprivate var transactionListDict: NSMutableDictionary?
-    fileprivate var sectionsList: NSMutableArray?
+    fileprivate var sectionsList: Array<String>?
+    @IBOutlet weak var loaderView: UIView!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ServiceManager.sharedInstance.getAllTransactions(completion: {  (result : String) in
-            print(result)
-            self.sortTransactions()
+        self.loaderView.isHidden = false;
+        ServiceManager.sharedInstance.getAllTransactions(completion: {  (result : Array<TransactionVO>) in
+            self.sortTransactions(transactions: result)
+            self.loaderView.isHidden = true;
             self.tableView.reloadData()
         }) { (error : NSError) in
+            self.loaderView.isHidden = true;
             self.showErrorAlert(errorMessage: error.localizedDescription)
         }
-        
-        let arrayList = NSMutableArray()
-        
-        for _ in 1...10 {
-            let transactionVO = TransactionVO()
-            transactionVO.amount = 1321
-            transactionVO.merchant = "Dunkin Donuts"
-            transactionVO.transactionTime = "12/12/2006"
-            
-            arrayList.add(transactionVO);
-        }
-        
-        self.transactionListDict = ["12/12/2006" : arrayList,
-                                    "12/11/2006" : arrayList]
-        
-        self.sectionsList = ["12/12/2006", "12/11/2006"]
-        self.tableView.reloadData()
     }
     
-    private func sortTransactions() {
+    private func sortTransactions(transactions:  Array<TransactionVO>) {
+        var transactionDates: [String]? = []
+        self.transactionListDict = NSMutableDictionary()
         
+        for transactionItem in transactions {
+            transactionDates?.append(transactionItem.transactionDisplayTime as String)
+        }
+        self.sectionsList = Array(Set(transactionDates! as [String]))
+        self.sectionsList = self.sectionsList?.sorted { $0 > $1 }
+
+        for transactionDate in self.sectionsList! {
+            let filteredArray = transactions.filter() { $0.transactionDisplayTime == transactionDate }
+            self.transactionListDict?.setValue(filteredArray, forKey: transactionDate)
+        }
+
     }
     
     private func showErrorAlert(errorMessage : String) {
@@ -66,6 +67,17 @@ class TransactionListViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func uniq<S : Sequence, T : Hashable>(source: S) -> [T] where S.Iterator.Element == T {
+        var buffer = [T]()
+        var added = Set<T>()
+        for elem in source {
+            if !added.contains(elem) {
+                buffer.append(elem)
+                added.insert(elem)
+            }
+        }
+        return buffer
+    }
 }
 
 extension TransactionListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -74,7 +86,7 @@ extension TransactionListViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionCellIndentifier", for: indexPath)
-        let transactions = self.transactionListDict![sectionsList![indexPath.section]] as? [TransactionVO]
+        let transactions = self.transactionListDict![sectionsList?[indexPath.section] as Any] as? [TransactionVO]
         guard transactions != nil else {
             return cell
         }
@@ -88,7 +100,7 @@ extension TransactionListViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        return self.sectionsList?[section] as! String?
+        return self.sectionsList?[section] as String?
         
     }
     
@@ -101,8 +113,8 @@ extension TransactionListViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let list = self.transactionListDict?[sectionsList?[section] ?? []] as! NSMutableArray
-        return list.count
+        let transactions = self.transactionListDict![sectionsList?[section] as Any] as? [TransactionVO]
+        return transactions!.count
     }
     
 }

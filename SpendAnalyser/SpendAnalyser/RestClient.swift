@@ -9,7 +9,7 @@
 import Foundation
 
 class RestClient {    
-    func makePostRequest(request: URLRequest, completion: @escaping (String)->Void, failure: @escaping (NSError)->Void) {
+    func makePostRequest(request: URLRequest, completion: @escaping (NSData)->Void, failure: @escaping (NSError)->Void) {
         let task = URLSession.shared.dataTask(with: request) {data, response, error in
             guard let data = data, error == nil else{
                 print("error=\(error)")
@@ -29,8 +29,8 @@ class RestClient {
                 print("error serializing JSON: \(error)")
             }
             //Not sure what you mean with "i need to return the json as String"
-            let responseString = String(data: data, encoding: .utf8) ?? ""
-            completion(responseString)
+//            let responseString = String(data: data, encoding: .utf8) ?? ""
+            completion(data as NSData)
         }
         task.resume()
     }

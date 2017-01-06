@@ -74,18 +74,49 @@
                                     <outlet property="delegate" destination="uEu-sW-iQz" id="coT-sM-BWk"/>
                                 </connections>
                             </tableView>
+                            <view hidden="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Ca-tS-mUB">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="M8I-1D-qtn">
+                                        <rect key="frame" x="169" y="283" width="37" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="37" id="1kt-GE-zsU"/>
+                                            <constraint firstAttribute="width" constant="37" id="8iP-AB-TLX"/>
+                                        </constraints>
+                                        <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </activityIndicatorView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQU-NV-Eil">
+                                        <rect key="frame" x="150" y="248" width="75" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="M8I-1D-qtn" firstAttribute="centerY" secondItem="9Ca-tS-mUB" secondAttribute="centerY" id="7F2-a8-byC"/>
+                                    <constraint firstItem="M8I-1D-qtn" firstAttribute="centerX" secondItem="9Ca-tS-mUB" secondAttribute="centerX" id="8id-XQ-OG9"/>
+                                    <constraint firstItem="vQU-NV-Eil" firstAttribute="centerX" secondItem="M8I-1D-qtn" secondAttribute="centerX" id="CDE-lD-qd1"/>
+                                    <constraint firstItem="M8I-1D-qtn" firstAttribute="top" secondItem="vQU-NV-Eil" secondAttribute="bottom" constant="14" id="ccn-nH-5SL"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="9Ca-tS-mUB" secondAttribute="trailing" id="0fP-h2-V6S"/>
                             <constraint firstItem="RKD-0v-3gp" firstAttribute="top" secondItem="UN8-at-MPT" secondAttribute="bottom" constant="-60" id="RdM-gm-SJJ"/>
+                            <constraint firstItem="9Ca-tS-mUB" firstAttribute="top" secondItem="UN8-at-MPT" secondAttribute="bottom" id="Vai-DU-Sgo"/>
                             <constraint firstItem="wwi-AF-0uW" firstAttribute="top" secondItem="RKD-0v-3gp" secondAttribute="bottom" id="WqM-To-rLZ"/>
+                            <constraint firstItem="9Ca-tS-mUB" firstAttribute="leading" secondItem="amF-M1-kFF" secondAttribute="leading" id="fgO-11-n1T"/>
                             <constraint firstItem="RKD-0v-3gp" firstAttribute="leading" secondItem="amF-M1-kFF" secondAttribute="leading" id="nCc-nX-Jwx"/>
                             <constraint firstAttribute="trailing" secondItem="RKD-0v-3gp" secondAttribute="trailing" id="oPq-ZZ-gbA"/>
+                            <constraint firstItem="wwi-AF-0uW" firstAttribute="top" secondItem="9Ca-tS-mUB" secondAttribute="bottom" id="tYD-Ja-0cI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Transactions" id="BJ6-WG-m3P"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="loaderView" destination="9Ca-tS-mUB" id="8Hj-oC-Xzq"/>
                         <outlet property="tableView" destination="RKD-0v-3gp" id="0sE-wr-FZX"/>
                     </connections>
                 </viewController>

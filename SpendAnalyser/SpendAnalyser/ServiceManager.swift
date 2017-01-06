@@ -28,7 +28,7 @@ class ServiceManager: NSObject {
         super.init()
     }
 
-    public func getAllTransactions(completion: @escaping (_ result: String) -> Void, failure: @escaping (_ error: NSError) -> Void) {
+    public func getAllTransactions(completion: @escaping (_ result: Array<TransactionVO>) -> Void, failure: @escaping (_ error: NSError) -> Void) {
         if (!Reachability.isNetworkReachable()) {//Check for internet connection
             failure(NSError(domain: "No internet connection", code: 121, userInfo: nil))
             return
@@ -48,16 +48,58 @@ class ServiceManager: NSObject {
             }
             request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")  // the request is JSON
             request.httpMethod = "POST"
-            self.httpClient.makePostRequest(request: request, completion: { (jsonResponse : String) in
-                DispatchQueue.main.sync(execute: { () -> Void in
-                    completion("SUCCESS!" + jsonResponse)
-                })
+            self.httpClient.makePostRequest(request: request, completion: { (jsonResponse : NSData) in
+                // convert String to NSData
+                
+                // convert NSData to 'AnyObject'
+                do {
+                    let jsonObject: AnyObject? = try JSONSerialization.jsonObject(with: jsonResponse as Data, options: []) as AnyObject
+                    // convert 'AnyObject' to Array<Business>
+                    let response = self.parseJsonForGetAllTransactions(response:jsonObject!)
+                    
+                    DispatchQueue.main.sync(execute: { () -> Void in
+                        completion(response.transactions)
+                    })
+                }catch {
+                    DispatchQueue.main.sync(execute: { () -> Void in
+                        failure(NSError(domain: "Parsing Error", code: 121, userInfo: nil))
+                    })
+                }
             }, failure: { (error : NSError) in
                 DispatchQueue.main.sync(execute: { () -> Void in
                     failure(error)//Throw general failures
                 })
             })
         })
+    }
+    
+    private func parseJsonForGetAllTransactions (response:AnyObject) -> GetAllTransactionResponse{
+        
+        var transactions:Array<TransactionVO> = []
+        let responseObject = GetAllTransactionResponse()
+        
+        if  response is NSDictionary {
+            responseObject.error =  (response["error"] as AnyObject? as? String) ?? ""
+            guard let transactionList = response["transactions"] else {
+                return responseObject
+            }
+            for transactionItem in transactionList as! Array<AnyObject>{
+                let transaction:TransactionVO = TransactionVO()
+                transaction.merchant = (transactionItem["merchant"] as AnyObject? as? NSString) ?? ""
+                transaction.amount  =  (transactionItem["amount"]  as AnyObject? as? Int) ?? 0
+
+                let transactionTime =  (transactionItem["transaction-time"] as AnyObject? as? NSString) ?? ""
+                transaction.transactionTime = transactionTime
+                if (transactionTime.length > 9) {
+                    transaction.transactionDisplayTime = (transactionTime.substring(with: NSRange(location: 0, length: 10)) as NSString) as String
+                }
+                
+                transactions.append(transaction)
+            }
+            
+            responseObject.transactions = transactions
+        }
+        return responseObject
     }
     
     private func getParams() -> NSDictionary {

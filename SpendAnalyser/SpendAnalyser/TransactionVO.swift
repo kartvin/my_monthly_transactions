@@ -13,5 +13,5 @@ class TransactionVO : NSObject {
     var amount :Int = 0
     var merchant :NSString = ""
     var transactionTime :NSString = ""
-    
+    var transactionDisplayTime :String = ""
 }
