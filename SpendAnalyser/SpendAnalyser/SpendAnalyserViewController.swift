@@ -9,15 +9,16 @@
 import UIKit
 class SpendAnalyserViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var expesneLabel: UILabel!
     fileprivate var sectionsList: Array<String>?
     fileprivate var transactionListDict: NSMutableDictionary?
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.sortAndLoadTransactions()
+        self.sortAndLoadAnalyserResults()
     }
 
-    private func sortAndLoadTransactions() {
+    private func sortAndLoadAnalyserResults() {
         guard let transactions = ServiceManager.sharedInstance.transactionList else {
             return
         }
@@ -30,6 +31,9 @@ class SpendAnalyserViewController: UIViewController {
         self.sectionsList = Array(Set(transactionDates! as [String]))
         self.sectionsList = self.sectionsList?.sorted { $0 > $1 }
         
+        var totalIncome = 0
+        var totalEpx = 0
+        
         for transactionDate in self.sectionsList! {
             let filteredArray = transactions.filter() { $0.transactionDisplayMonth == transactionDate }
             let crediCardPaymentList = filteredArray.filter() {$0.amount > 0}
@@ -37,10 +41,13 @@ class SpendAnalyserViewController: UIViewController {
             let totalIncomeForMonth = crediCardPaymentList.reduce(0) { $0 + $1.amount}
             let totalExpForMonth = crediCardSpentList.reduce(0) { $0 + $1.amount}
             
-//            let expString = "$".appendingFormat("%@ vs $%@", UInt8(totalIncomeForMonth).stringFormattedWithComma, UInt8(totalExpForMonth).stringFormattedWithComma)
+            totalIncome += abs(totalIncomeForMonth)
+            totalEpx += abs(totalExpForMonth)
             let expString = "$"+abs(totalIncomeForMonth).stringFormattedWithComma+" income vs $"+abs(totalExpForMonth).stringFormattedWithComma+" expense"
             self.transactionListDict?.setValue(expString, forKey: transactionDate)
         }
+        self.expesneLabel.text = "Average income of $" + (totalIncome/(sectionsList?.count)!).stringFormattedWithComma + " vs average expense of $" + (totalEpx/(sectionsList?.count)!).stringFormattedWithComma
+        
         self.tableView.reloadData()
     }
 }
@@ -51,7 +58,7 @@ extension SpendAnalyserViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SpendAnalyserCellIndentifier", for: indexPath)
-        let expString = self.transactionListDict![sectionsList?[indexPath.section] ?? ""] as!  String
+        let expString = self.transactionListDict![sectionsList?[indexPath.row] ?? ""] as!  String
         cell.textLabel?.text = self.sectionsList?[indexPath.row]
         cell.detailTextLabel?.text = expString
 
@@ -65,12 +72,4 @@ extension SpendAnalyserViewController: UITableViewDelegate, UITableViewDataSourc
             return 0
         }
     }
-    
-    private func getIncomeVsSpendRatioString(transactions: [TransactionVO]) {
-        for transactionDate in self.sectionsList! {
-            let filteredArray = transactions.filter() { $0.transactionDisplayMonth == transactionDate }
-            self.transactionListDict?.setValue(filteredArray, forKey: transactionDate)
-        }
-    }
-    
 }
