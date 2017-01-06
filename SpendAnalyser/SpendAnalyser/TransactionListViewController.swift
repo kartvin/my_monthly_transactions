@@ -23,17 +23,18 @@ extension Integer {
     }
 }
 
-class TransactionListViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
+class TransactionListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    var transactionListDict: NSMutableDictionary?
-    var sectionsList: NSMutableArray?
+    fileprivate var transactionListDict: NSMutableDictionary?
+    fileprivate var sectionsList: NSMutableArray?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ServiceManager.sharedInstance.getAllTransactions(input: "test") { (result : String) in
+        ServiceManager.sharedInstance.getAllTransactions(completion: {  (result : String) in
             print(result)
-            sortTransactions()
+            self.sortTransactions()
             self.tableView.reloadData()
+        }) { (error : NSError) in
         }
         
         let arrayList = NSMutableArray()
@@ -57,8 +58,13 @@ class TransactionListViewController: UIViewController,UITableViewDelegate, UITab
     private func sortTransactions() {
         
     }
-    // MARK: - Table view data source
+    
+}
 
+extension TransactionListViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    // MARK: - Table view data source
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionCellIndentifier", for: indexPath)
         let transactions = self.transactionListDict![sectionsList![indexPath.section]] as? [TransactionVO]
@@ -78,7 +84,7 @@ class TransactionListViewController: UIViewController,UITableViewDelegate, UITab
         return self.sectionsList?[section] as! String?
         
     }
- 
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         if let sectionData = self.sectionsList {
             return sectionData.count
@@ -91,4 +97,5 @@ class TransactionListViewController: UIViewController,UITableViewDelegate, UITab
         let list = self.transactionListDict?[sectionsList?[section] ?? []] as! NSMutableArray
         return list.count
     }
+    
 }
