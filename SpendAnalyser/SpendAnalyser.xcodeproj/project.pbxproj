@@ -14,6 +14,7 @@
 		1BE350461E1F2E98005B229E /* SpendAnalyserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE350451E1F2E98005B229E /* SpendAnalyserTests.swift */; };
 		1BE350511E1F2E98005B229E /* SpendAnalyserUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE350501E1F2E98005B229E /* SpendAnalyserUITests.swift */; };
 		1BE350601E1F33E4005B229E /* TransactionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE3505F1E1F33E4005B229E /* TransactionListViewController.swift */; };
+		1BE350631E1F3E8D005B229E /* TransactionVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE350621E1F3E8D005B229E /* TransactionVO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		1BE350501E1F2E98005B229E /* SpendAnalyserUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendAnalyserUITests.swift; sourceTree = "<group>"; };
 		1BE350521E1F2E98005B229E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BE3505F1E1F33E4005B229E /* TransactionListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionListViewController.swift; sourceTree = "<group>"; };
+		1BE350621E1F3E8D005B229E /* TransactionVO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionVO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		1BE3502D1E1F2E97005B229E /* SpendAnalyser */ = {
 			isa = PBXGroup;
 			children = (
+				1BE350611E1F3E76005B229E /* Managed Objects */,
 				1BE3502E1E1F2E97005B229E /* AppDelegate.swift */,
 				1BE3505E1E1F33C8005B229E /* ViewControllers */,
 				1BE350341E1F2E98005B229E /* Main.storyboard */,
@@ -131,6 +134,14 @@
 				1BE3505F1E1F33E4005B229E /* TransactionListViewController.swift */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		1BE350611E1F3E76005B229E /* Managed Objects */ = {
+			isa = PBXGroup;
+			children = (
+				1BE350621E1F3E8D005B229E /* TransactionVO.swift */,
+			);
+			name = "Managed Objects";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BE350631E1F3E8D005B229E /* TransactionVO.swift in Sources */,
 				1BE3502F1E1F2E97005B229E /* AppDelegate.swift in Sources */,
 				1BE350601E1F33E4005B229E /* TransactionListViewController.swift in Sources */,
 			);
