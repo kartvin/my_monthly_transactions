@@ -20,6 +20,7 @@
 		1BE3506A1E1F4D32005B229E /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE350691E1F4D32005B229E /* RestClient.swift */; };
 		1BE3506C1E1F6006005B229E /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE3506B1E1F6006005B229E /* Reachability.swift */; };
 		1BE3506E1E1F62E9005B229E /* GetAllTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE3506D1E1F62E9005B229E /* GetAllTransactionResponse.swift */; };
+		1BF3A2611E1F8167009331A3 /* SpendAnalyserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3A2601E1F8167009331A3 /* SpendAnalyserViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		1BE350691E1F4D32005B229E /* RestClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestClient.swift; sourceTree = "<group>"; };
 		1BE3506B1E1F6006005B229E /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		1BE3506D1E1F62E9005B229E /* GetAllTransactionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAllTransactionResponse.swift; sourceTree = "<group>"; };
+		1BF3A2601E1F8167009331A3 /* SpendAnalyserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpendAnalyserViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				1BE3505F1E1F33E4005B229E /* TransactionListViewController.swift */,
+				1BF3A2601E1F8167009331A3 /* SpendAnalyserViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				1BE3502F1E1F2E97005B229E /* AppDelegate.swift in Sources */,
 				1BE3506E1E1F62E9005B229E /* GetAllTransactionResponse.swift in Sources */,
 				1BE3506C1E1F6006005B229E /* Reachability.swift in Sources */,
+				1BF3A2611E1F8167009331A3 /* SpendAnalyserViewController.swift in Sources */,
 				1BE350601E1F33E4005B229E /* TransactionListViewController.swift in Sources */,
 				1BE3506A1E1F4D32005B229E /* RestClient.swift in Sources */,
 				1BE350681E1F4B9C005B229E /* ServiceManager.swift in Sources */,
@@ -562,6 +566,7 @@
 				1BE350571E1F2E98005B229E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1BE350581E1F2E98005B229E /* Build configuration list for PBXNativeTarget "SpendAnalyserTests" */ = {
 			isa = XCConfigurationList;
@@ -570,6 +575,7 @@
 				1BE3505A1E1F2E98005B229E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1BE3505B1E1F2E98005B229E /* Build configuration list for PBXNativeTarget "SpendAnalyserUITests" */ = {
 			isa = XCConfigurationList;
@@ -578,6 +584,7 @@
 				1BE3505D1E1F2E98005B229E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
