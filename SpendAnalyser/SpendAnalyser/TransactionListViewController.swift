@@ -8,22 +8,7 @@
 
 import UIKit
 
-struct Number {
-    static let formatterWithComma: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.groupingSeparator = ","
-        formatter.numberStyle = .decimal
-        return formatter
-    }()
-}
-
-extension Integer {
-    var stringFormattedWithComma: String {
-        return Number.formatterWithComma.string(from: self as! NSNumber) ?? ""
-    }
-}
-
-class TransactionListViewController: UIViewController {
+class TransactionListViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     fileprivate var transactionListDict: NSMutableDictionary?
     fileprivate var sectionsList: Array<String>?
@@ -62,12 +47,6 @@ class TransactionListViewController: UIViewController {
             self.transactionListDict?.setValue(filteredArray, forKey: transactionDate)
         }
 
-    }
-    
-    private func showErrorAlert(errorMessage : String) {
-        let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
     }
     
     //Set intersection

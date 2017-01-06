@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class SpendAnalyserViewController: UIViewController {
+class SpendAnalyserViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var expesneLabel: UILabel!
     fileprivate var sectionsList: Array<String>?
@@ -30,12 +30,6 @@ class SpendAnalyserViewController: UIViewController {
                 self.showErrorAlert(errorMessage: error.localizedDescription)
             }
         }
-    }
-
-    private func showErrorAlert(errorMessage : String) {
-        let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
     }
     
     private func sortAndLoadAnalyserResults(newResult : Array<TransactionVO>) {
