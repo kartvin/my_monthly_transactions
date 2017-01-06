@@ -29,6 +29,10 @@ class ServiceManager: NSObject {
     }
 
     public func getAllTransactions(completion: @escaping (_ result: String) -> Void, failure: @escaping (_ error: NSError) -> Void) {
+        if (!Reachability.isNetworkReachable()) {//Check for internet connection
+            failure(NSError(domain: "No internet connection", code: 121, userInfo: nil))
+            return
+        }
         let urlString = self.urls?["GetAllTransactions"] as! String
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async(execute: { () -> Void in
             var request = URLRequest(url: URL(string: urlString)!)
@@ -36,7 +40,7 @@ class ServiceManager: NSObject {
                 let jsonData = try JSONSerialization.data(withJSONObject: self.getParams(), options: .prettyPrinted)
                 request.httpBody = jsonData
             }
-            catch {
+            catch {//Throw failure block incase of invalid params
                 DispatchQueue.main.sync(execute: { () -> Void in
                     failure(NSError(domain: "Invalid parameters", code: 121, userInfo: nil))
                 })
@@ -50,7 +54,7 @@ class ServiceManager: NSObject {
                 })
             }, failure: { (error : NSError) in
                 DispatchQueue.main.sync(execute: { () -> Void in
-                    failure(error)
+                    failure(error)//Throw general failures
                 })
             })
         })

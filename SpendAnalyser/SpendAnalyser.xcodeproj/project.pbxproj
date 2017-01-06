@@ -18,6 +18,7 @@
 		1BE350651E1F4B61005B229E /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1BE350641E1F4B61005B229E /* Configuration.plist */; };
 		1BE350681E1F4B9C005B229E /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE350671E1F4B9C005B229E /* ServiceManager.swift */; };
 		1BE3506A1E1F4D32005B229E /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE350691E1F4D32005B229E /* RestClient.swift */; };
+		1BE3506C1E1F6006005B229E /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE3506B1E1F6006005B229E /* Reachability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		1BE350641E1F4B61005B229E /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
 		1BE350671E1F4B9C005B229E /* ServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
 		1BE350691E1F4D32005B229E /* RestClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestClient.swift; sourceTree = "<group>"; };
+		1BE3506B1E1F6006005B229E /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				1BE350671E1F4B9C005B229E /* ServiceManager.swift */,
+				1BE3506B1E1F6006005B229E /* Reachability.swift */,
 				1BE350691E1F4D32005B229E /* RestClient.swift */,
 			);
 			name = Managers;
@@ -301,6 +304,7 @@
 			files = (
 				1BE350631E1F3E8D005B229E /* TransactionVO.swift in Sources */,
 				1BE3502F1E1F2E97005B229E /* AppDelegate.swift in Sources */,
+				1BE3506C1E1F6006005B229E /* Reachability.swift in Sources */,
 				1BE350601E1F33E4005B229E /* TransactionListViewController.swift in Sources */,
 				1BE3506A1E1F4D32005B229E /* RestClient.swift in Sources */,
 				1BE350681E1F4B9C005B229E /* ServiceManager.swift in Sources */,

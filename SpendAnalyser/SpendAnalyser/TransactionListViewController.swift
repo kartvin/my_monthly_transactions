@@ -35,6 +35,7 @@ class TransactionListViewController: UIViewController {
             self.sortTransactions()
             self.tableView.reloadData()
         }) { (error : NSError) in
+            self.showErrorAlert(errorMessage: error.localizedDescription)
         }
         
         let arrayList = NSMutableArray()
@@ -57,6 +58,12 @@ class TransactionListViewController: UIViewController {
     
     private func sortTransactions() {
         
+    }
+    
+    private func showErrorAlert(errorMessage : String) {
+        let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
 }
