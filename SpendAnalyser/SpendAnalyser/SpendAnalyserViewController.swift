@@ -11,9 +11,9 @@ class SpendAnalyserViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     fileprivate var sectionsList: Array<String>?
     fileprivate var transactionListDict: NSMutableDictionary?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         self.sortAndLoadTransactions()
     }
 
@@ -32,11 +32,16 @@ class SpendAnalyserViewController: UIViewController {
         
         for transactionDate in self.sectionsList! {
             let filteredArray = transactions.filter() { $0.transactionDisplayMonth == transactionDate }
-            self.transactionListDict?.setValue(filteredArray, forKey: transactionDate)
+            let crediCardPaymentList = filteredArray.filter() {$0.amount > 0}
+            let crediCardSpentList = filteredArray.filter() {$0.amount < 0}
+            let totalIncomeForMonth = crediCardPaymentList.reduce(0) { $0 + $1.amount}
+            let totalExpForMonth = crediCardSpentList.reduce(0) { $0 + $1.amount}
+            
+//            let expString = "$".appendingFormat("%@ vs $%@", UInt8(totalIncomeForMonth).stringFormattedWithComma, UInt8(totalExpForMonth).stringFormattedWithComma)
+            let expString = "$"+abs(totalIncomeForMonth).stringFormattedWithComma+" income vs $"+abs(totalExpForMonth).stringFormattedWithComma+" expense"
+            self.transactionListDict?.setValue(expString, forKey: transactionDate)
         }
         self.tableView.reloadData()
-
-        
     }
 }
 
@@ -46,15 +51,9 @@ extension SpendAnalyserViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SpendAnalyserCellIndentifier", for: indexPath)
-//        let transactions = self.transactionListDict![sectionsList?[indexPath.section] as Any] as? [TransactionVO]
-//        guard transactions != nil else {
-//            return cell
-//        }
-//        
-//        let transaction = transactions?[indexPath.row]
+        let expString = self.transactionListDict![sectionsList?[indexPath.section] ?? ""] as!  String
         cell.textLabel?.text = self.sectionsList?[indexPath.row]
-//        let amountStr = "$"
-//        cell.detailTextLabel?.text = amountStr.appending((transaction?.amount.stringFormattedWithComma)!)
+        cell.detailTextLabel?.text = expString
 
         return cell
     }
@@ -64,6 +63,13 @@ extension SpendAnalyserViewController: UITableViewDelegate, UITableViewDataSourc
             return sectionData.count
         } else {
             return 0
+        }
+    }
+    
+    private func getIncomeVsSpendRatioString(transactions: [TransactionVO]) {
+        for transactionDate in self.sectionsList! {
+            let filteredArray = transactions.filter() { $0.transactionDisplayMonth == transactionDate }
+            self.transactionListDict?.setValue(filteredArray, forKey: transactionDate)
         }
     }
     
