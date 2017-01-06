@@ -50,12 +50,9 @@ class ServiceManager: NSObject {
             request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")  // the request is JSON
             request.httpMethod = "POST"
             self.httpClient.makePostRequest(request: request, completion: { (jsonResponse : NSData) in
-                // convert String to NSData
-                
-                // convert NSData to 'AnyObject'
                 do {
+                    //convert data to AnyObject
                     let jsonObject: AnyObject? = try JSONSerialization.jsonObject(with: jsonResponse as Data, options: []) as AnyObject
-                    // convert 'AnyObject' to Array<Business>
                     let response = self.parseJsonForGetAllTransactions(response:jsonObject!)
                     
                     DispatchQueue.main.sync(execute: { () -> Void in
@@ -75,6 +72,8 @@ class ServiceManager: NSObject {
         })
     }
     
+    //This method will parse the json and save in TransactionVO
+    //Only required fields are saved into the object
     private func parseJsonForGetAllTransactions (response:AnyObject) -> GetAllTransactionResponse{
         
         var transactions:Array<TransactionVO> = []
@@ -106,6 +105,7 @@ class ServiceManager: NSObject {
         return responseObject
     }
     
+    //POST body JSON parameters
     private func getParams() -> NSDictionary {
         let params = ["uid" : 1110590645,
                       "token" : "1DE1AFADD0AFE46068857E0DD8C050B0",

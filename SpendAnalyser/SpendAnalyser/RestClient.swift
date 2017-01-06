@@ -16,20 +16,17 @@ class RestClient {
                 return
             }
             
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+            // check for http errors
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
                 print("response = \(response)")
             }
-            print(data as NSData) //<-`as NSData` is useful for debugging
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                print(json)
-                //Why don't you use decoded JSON object? (`json` may not be a `String`)
+                print(json) // for debug
             } catch {
-                print("error serializing JSON: \(error)")
+                print("error in JSON : \(error)")
             }
-            //Not sure what you mean with "i need to return the json as String"
-//            let responseString = String(data: data, encoding: .utf8) ?? ""
             completion(data as NSData)
         }
         task.resume()

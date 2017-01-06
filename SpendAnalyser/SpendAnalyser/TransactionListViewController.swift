@@ -34,6 +34,7 @@ class TransactionListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loaderView.isHidden = false;
+        //Makes service call and load the tableview on completion or throws an error on failure
         ServiceManager.sharedInstance.getAllTransactions(completion: {  (result : Array<TransactionVO>) in
             self.sortTransactions(transactions: result)
             self.loaderView.isHidden = true;
@@ -45,6 +46,7 @@ class TransactionListViewController: UIViewController {
         }
     }
     
+    //Sorts the transaction list based on displayTime (i.e)10-10-2016
     private func sortTransactions(transactions:  Array<TransactionVO>) {
         var transactionDates: [String]? = []
         self.transactionListDict = NSMutableDictionary()
@@ -68,6 +70,7 @@ class TransactionListViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    //Set intersection
     func uniq<S : Sequence, T : Hashable>(source: S) -> [T] where S.Iterator.Element == T {
         var buffer = [T]()
         var added = Set<T>()
